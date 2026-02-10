@@ -20,10 +20,10 @@ import auca.ac.rw.question3_restaurant_api.modal.restaurant.MenuItem;
 @RestController
 @RequestMapping("/api/menu")
 public class MenuController {
-    // In-memory menu list
+    
     private List<MenuItem> menuItems = new ArrayList<>();
 
-    // Initialize sample menu items (8 items)
+    
     public MenuController() {
         menuItems.add(new MenuItem(1L, "Spring Rolls", "Crispy vegetable rolls", 5.99, "Appetizer", true));
         menuItems.add(new MenuItem(2L, "Garlic Bread", "Toasted bread with garlic butter", 4.49, "Appetizer", true));
