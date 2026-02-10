@@ -88,6 +88,22 @@ Response (201 Created)
   "title": "Effective Java",
   "author": "Joshua Bloch"
 }
+
+5️. Delete a Book by ID
+
+Method: DELETE
+
+http://localhost:8080/api/books/{id}
+
+
+Example
+
+http://localhost:8080/api/books/2
+
+
+Response (200 OK)
+Book deleted successfully.
+
  Testing
 Tested using Postman
 
