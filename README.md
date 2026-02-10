@@ -1,26 +1,25 @@
-
 Name: Mr ASDODJI Le Sage
+
 Course: Web Technologies / Spring Boot
 Assignment: RESTful API Implementation
 
-question5-task-api/README.md
-# Question 5 – Task Management REST API
+Question 5 – Task Management REST API
+Description
 
-##  Description
-This Spring Boot REST API manages tasks in a simple task management system.  
+This Spring Boot REST API manages tasks in a simple task management system.
 It supports CRUD operations, filtering by status and priority, and marking tasks as completed.
+The application uses an in-memory list to store tasks.
 
----
+How to Run the Application
+Prerequisites
 
-##  How to Run the Application
+Java 17+
 
-### Prerequisites
-- Java 17+
-- Maven
-- Spring Boot
+Maven
 
-### Run Commands
-```bash
+Spring Boot
+
+Run Commands
 mvn clean install
 mvn spring-boot:run
 
@@ -29,13 +28,13 @@ The application runs on:
 
 http://localhost:8080
 
- Base URL
+Base URL
 /api/tasks
 
- API Endpoints
+API Endpoints
 1️. Get All Tasks
 
-GET
+Method: GET
 
 /api/tasks
 
@@ -45,39 +44,61 @@ Response (200 OK)
 [
   {
     "taskId": 1,
-    "title": "Complete Assignment",
-    "description": "Finish the Spring Boot project",
+    "title": "Finish Assignment",
+    "description": "Complete REST API project",
     "priority": "HIGH",
-    "completed": false
+    "completed": false,
+    "dueDate": "2026-02-10"
+  },
+  {
+    "taskId": 2,
+    "title": "Study Spring Boot",
+    "description": "Revise controllers",
+    "priority": "MEDIUM",
+    "completed": true,
+    "dueDate": "2026-02-08"
+  },
+  {
+    "taskId": 3,
+    "title": "Buy groceries",
+    "description": "Milk and bread",
+    "priority": "LOW",
+    "completed": false,
+    "dueDate": "2026-02-09"
   }
 ]
 
 2️. Get Task by ID
 
-GET
+Method: GET
 
 /api/tasks/{taskId}
+
+
+Example
+
+/api/tasks/1
 
 
 Response (200 OK)
 
 {
   "taskId": 1,
-  "title": "Complete Assignment",
-  "description": "Finish the Spring Boot project",
+  "title": "Finish Assignment",
+  "description": "Complete REST API project",
   "priority": "HIGH",
-  "completed": false
+  "completed": false,
+  "dueDate": "2026-02-10"
 }
 
 3️. Get Tasks by Completion Status
 
-GET
+Method: GET
 
-/api/tasks/status?completed={true/false}
+/api/tasks/status?completed=true
 
 
-Query Parameter
-
+Query Parameter:
 completed – Filter tasks by completion status
 
 Response (200 OK)
@@ -85,39 +106,45 @@ Response (200 OK)
 [
   {
     "taskId": 2,
-    "title": "Read Book",
-    "description": "Read Clean Code",
+    "title": "Study Spring Boot",
+    "description": "Revise controllers",
     "priority": "MEDIUM",
-    "completed": true
+    "completed": true,
+    "dueDate": "2026-02-08"
   }
 ]
 
 4️. Get Tasks by Priority
 
-GET
+Method: GET
 
 /api/tasks/priority/{priority}
 
 
-Path Parameter
-
+Path Parameter:
 priority – Task priority (LOW, MEDIUM, HIGH)
+
+Example
+
+/api/tasks/priority/HIGH
+
 
 Response (200 OK)
 
 [
   {
-    "taskId": 3,
-    "title": "Submit Report",
-    "description": "Send the monthly report to manager",
+    "taskId": 1,
+    "title": "Finish Assignment",
+    "description": "Complete REST API project",
     "priority": "HIGH",
-    "completed": false
+    "completed": false,
+    "dueDate": "2026-02-10"
   }
 ]
 
 5️. Create New Task
 
-POST
+Method: POST
 
 /api/tasks
 
@@ -125,9 +152,10 @@ POST
 Request Body
 
 {
-  "title": "Buy Groceries",
-  "description": "Milk, Eggs, Bread",
-  "priority": "MEDIUM"
+  "title": "New Task",
+  "description": "Task description",
+  "priority": "MEDIUM",
+  "dueDate": "2026-02-11"
 }
 
 
@@ -135,15 +163,16 @@ Response (201 Created)
 
 {
   "taskId": 4,
-  "title": "Buy Groceries",
-  "description": "Milk, Eggs, Bread",
+  "title": "New Task",
+  "description": "Task description",
   "priority": "MEDIUM",
-  "completed": false
+  "completed": false,
+  "dueDate": "2026-02-11"
 }
 
 6️. Update Task
 
-PUT
+Method: PUT
 
 /api/tasks/{taskId}
 
@@ -151,26 +180,28 @@ PUT
 Request Body
 
 {
-  "title": "Buy Groceries and Fruits",
-  "description": "Milk, Eggs, Bread, Apples",
+  "title": "Buy groceries and fruits",
+  "description": "Milk and bread, add apples",
   "priority": "HIGH",
-  "completed": false
+  "completed": false,
+  "dueDate": "2026-02-09"
 }
 
 
 Response (200 OK)
 
 {
-  "taskId": 4,
-  "title": "Buy Groceries and Fruits",
-  "description": "Milk, Eggs, Bread, Apples",
+  "taskId": 3,
+  "title": "Buy groceries and fruits",
+  "description": "Milk and bread, add apples",
   "priority": "HIGH",
-  "completed": false
+  "completed": false,
+  "dueDate": "2026-02-09"
 }
 
 7️. Mark Task as Completed
 
-PATCH
+Method: PATCH
 
 /api/tasks/{taskId}/complete
 
@@ -178,28 +209,33 @@ PATCH
 Response (200 OK)
 
 {
-  "taskId": 4,
-  "title": "Buy Groceries and Fruits",
+  "taskId": 3,
+  "title": "Buy groceries and fruits",
   "completed": true
 }
 
 8️. Delete Task
 
-DELETE
+Method: DELETE
 
 /api/tasks/{taskId}
 
 
+Example
+
+/api/tasks/2
+
+
 Response (204 No Content)
 
- Testing
+Testing
 
 Verified all endpoints using Postman
 
-Correct HTTP status codes returned (200, 201, 204, 404)
+Filters and PATCH updates behave correctly
 
-Filters and PATCH updates behave as expected
+Correct HTTP status codes returned (200, 201, 204)
 
- Status
+Status
 
 Completed and verified
