@@ -117,7 +117,7 @@ Response (200 OK)
   }
 ]
 
-5️. Add a New Menu Item
+6. Add a New Menu Item
 
 POST
 
@@ -145,34 +145,38 @@ Response (201 Created)
   "available": true
 }
 
-6️. Update a Menu Item
+7️. Toggle Menu Item Availability
 
-PUT
+Method: PUT
 
-http://localhost:8080/api/restaurants/menu/{itemId}
+http://localhost:8080/api/menu/{id}/availability
 
 
-Request Body
+Example
 
+http://localhost:8080/api/menu/2/availability
+
+Body (JSON)
 {
-  "name": "Caesar Salad Deluxe",
-  "category": "Salad",
-  "price": 7.0,
+  "id": 2,
+  "name": "Chicken Pizza",
+  "category": "Fast Food",
+  "price": 8000,
   "available": true
 }
-
 
 Response (200 OK)
 
 {
-  "itemId": 2,
-  "name": "Caesar Salad Deluxe",
-  "category": "Salad",
-  "price": 7.0,
-  "available": true
+  "id": 2,
+  "name": "Chicken Pizza",
+  "category": "Fast Food",
+  "price": 8000,
+  "available": false
 }
 
-7️. Delete a Menu Item
+
+8. Delete a Menu Item
 
 DELETE
 
