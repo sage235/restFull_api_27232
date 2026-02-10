@@ -26,7 +26,7 @@ public class UserProfileController {
 
     private List<UserProfile> users = new ArrayList<>();
 
-    // Sample data
+    
     public UserProfileController() {
         users.add(new UserProfile(1L, "john_doe", "john@example.com",
                 "John Doe", 76, "Rwanda", "Software Engineering student", true));
@@ -36,13 +36,13 @@ public class UserProfileController {
                 "Paul Kagame", 70, "Tchad", "Tech enthusiast", false));
     }
 
-    // 1. GET all users
+    // GET  users
     @GetMapping
     public ApiResponse<List<UserProfile>> getAllUsers() {
         return new ApiResponse<>(true, "Users retrieved successfully", users);
     }
 
-    // 2. GET user by ID
+    // GET user by ID
     @GetMapping("/{userId}")
     public ResponseEntity<ApiResponse<UserProfile>> getUserById(@PathVariable Long userId) {
         for (UserProfile user : users) {
@@ -58,7 +58,7 @@ public class UserProfileController {
         );
     }
 
-    // 3. Search by username
+    // search by username
     @GetMapping("/search/username")
     public ApiResponse<List<UserProfile>> searchByUsername(@RequestParam String username) {
         List<UserProfile> result = new ArrayList<>();
@@ -70,7 +70,7 @@ public class UserProfileController {
         return new ApiResponse<>(true, "Search completed", result);
     }
 
-    // 4. Search by country
+    // search by country
     @GetMapping("/search/country/{country}")
     public ApiResponse<List<UserProfile>> searchByCountry(@PathVariable String country) {
         List<UserProfile> result = new ArrayList<>();
@@ -82,7 +82,7 @@ public class UserProfileController {
         return new ApiResponse<>(true, "Users filtered by country", result);
     }
 
-    // 5. Search by age range
+    // search by age range
     @GetMapping("/search/age")
     public ApiResponse<List<UserProfile>> searchByAgeRange(
             @RequestParam int min,
@@ -97,7 +97,7 @@ public class UserProfileController {
         return new ApiResponse<>(true, "Users filtered by age range", result);
     }
 
-    // 6. POST create user profile
+    // POST create user profile
     @PostMapping
     public ResponseEntity<ApiResponse<UserProfile>> createUser(@RequestBody UserProfile userProfile) {
         users.add(userProfile);
@@ -107,7 +107,7 @@ public class UserProfileController {
         );
     }
 
-    // 7. PUT update user profile
+    // PUT update user profile
     @PutMapping("/{userId}")
     public ResponseEntity<ApiResponse<UserProfile>> updateUser(
             @PathVariable Long userId,
@@ -132,7 +132,7 @@ public class UserProfileController {
         );
     }
 
-    // 8. Activate user
+    // Activate user
     @PatchMapping("/{userId}/activate")
     public ResponseEntity<ApiResponse<UserProfile>> activateUser(@PathVariable Long userId) {
         for (UserProfile user : users) {
@@ -149,7 +149,7 @@ public class UserProfileController {
         );
     }
 
-    // 9. Deactivate user
+    // Deactivate user
     @PatchMapping("/{userId}/deactivate")
     public ResponseEntity<ApiResponse<UserProfile>> deactivateUser(@PathVariable Long userId) {
         for (UserProfile user : users) {
@@ -166,7 +166,7 @@ public class UserProfileController {
         );
     }
 
-    // 10. DELETE user profile
+    // Delete user by Id
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long userId) {
         for (UserProfile user : users) {
@@ -183,4 +183,5 @@ public class UserProfileController {
         );
     }
 }
+
 
